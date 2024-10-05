@@ -5,5 +5,5 @@
 
 # Для запуска тестов нужно выполнить команды:
 - ```pip install -r requirements```
-- ```pip install playwright````
+- ```install playwright```
 - ```pytest tests```
