@@ -14,8 +14,8 @@ on:
         description: "Set environment, e.g. `ENV=prod or ENV=shot`"
       arguments:
         required: false
-        default: "-m regression"
-        description: "pytest additional arguments, e.g. `-m regression`"
+        default: "-m"
+        description: "pytest"
 
 
 jobs:
@@ -42,7 +42,7 @@ jobs:
         run: python3 -m pip install -r requirements.txt
       - run: |
           if [ "${{github.event_name}}" = "schedule" ]; then
-            export args="-m regression"
+            export args="-m"
             export ENV="prod"
           else
             export ENV='${{github.event.inputs.environment}}'
