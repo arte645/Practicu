@@ -1,11 +1,11 @@
-name: TestRegression
-
+name: Test Practice Labs
 
 on:
-  #push: {}
-#  schedule:
-#    - cron: '0 22 * * *'
-
+  push:
+    branches:
+      - 'lab**'
+  pull_request:
+    types: [opened, reopened]
   workflow_dispatch:
     inputs:
       environment:
@@ -14,8 +14,8 @@ on:
         description: "Set environment, e.g. `ENV=prod or ENV=shot`"
       arguments:
         required: false
-        default: "-m"
-        description: "pytest"
+        default: "-m regression"
+        description: "pytest additional arguments, e.g. `-m regression`"
 
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
     name: Regression tests
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright/python:v1.41.0-jammy
+      image: mcr.microsoft.com/playwright/python:v1.47.0-jammy
     env:
       AUTH_LOGIN: ${{ secrets.AUTH_LOGIN }}
       AUTH_PASSWORD: ${{ secrets.AUTH_PASSWORD }}
@@ -33,7 +33,7 @@ jobs:
     outputs:
       env_name: ${{ steps.pytest.outputs.env_name }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -41,12 +41,12 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install -r requirements.txt
       - run: |
-          if [ "${{github.event_name}}" = "schedule" ]; then
-            export args="-m"
-            export ENV="prod"
-          else
+          if [ "${{github.event_name}}" = "workflow_dispatch" ]; then
             export ENV='${{github.event.inputs.environment}}'
             export args='${{github.event.inputs.arguments}}'
+          else
+            export ENV="prod"
+            export args="-m regression"
           fi
-            echo "::set-output name=env_name::${ENV:-prod}"
+            echo "env_name::${ENV:-prod}"
             pytest ${args} --bn ${{ matrix.browser }}
