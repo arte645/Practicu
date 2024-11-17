@@ -1,0 +1,7 @@
+{
+    "firstname": "string",
+    "lastname": "string",
+    "totalprice": "integer",
+    "depositpaid": "bool",
+    "bookingdates": "dict"
+}
