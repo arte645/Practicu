@@ -14,10 +14,12 @@ class Api:
         self.context = self.browser.new_context()
         
     def get(self, path: str):  
-            self.response = self.context.request.get(f'{self.base_url}{path}')
+        self.response = self.context.request.get(f'{self.base_url}{path}')
+        return self
     
     def post(self, path: str, json_body: dict = None):        
         self.response = self.context.request.post(f'{self.base_url}{path}', data=json_body)
+        return self
     
     def checkout(self, schema, predictedCode = 200):
         assert self.response.status == predictedCode, f'Expected status 200, got {self.response.status}'
