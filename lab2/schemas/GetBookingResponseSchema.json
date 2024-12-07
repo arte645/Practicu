@@ -3,5 +3,14 @@
     "lastname": "string",
     "totalprice": "integer",
     "depositpaid": "bool",
-    "bookingdates": "dict"
+    "bookingdates": {
+            "type": "object",
+                            "properties": {
+                                "checkin": {"type": "string"},
+                                "checkout": {"type": "string"}
+                            },
+                            "required": ["checkin", "checkout"]
+                        },
+    "additionalneeds": "string",
+    "required": ["firstname", "lastname", "totalprice", "depositpaid", "bookingdates"]
 }

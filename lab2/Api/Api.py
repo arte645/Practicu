@@ -27,9 +27,5 @@ class Api:
         self.close()
         
     def close(self):
-        if self.context:
-            self.context.close()
-        if self.browser:
-            self.browser.close()
         if self.playwright:
             self.playwright.stop() 
