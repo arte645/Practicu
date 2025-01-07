@@ -21,10 +21,16 @@ class Api:
         self.response = self.context.request.post(f'{self.base_url}{path}', data=json_body)
         return self
     
-    def checkout(self, schema, predictedCode = 200):
-        assert self.response.status == predictedCode, f'Expected status 200, got {self.response.status}'
-        validate(instance=self.response.json(), schema=schema)
+    def delete(self, path: str):
+        self.response =  self.context.request.delete(f'{self.base_url}{path}')
         self.close()
+    
+    def checkout(self, schema = {}, predictedCode = 200, close = True):
+        assert self.response.status == predictedCode, f'Expected status {predictedCode}, got {self.response.status}'
+        if self.response.status!=500:
+            validate(instance=self.response.json(), schema=schema)
+        if close:
+            self.close()
         
     def close(self):
         if self.playwright:
