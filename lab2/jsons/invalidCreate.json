@@ -1,0 +1,32 @@
+[
+    {
+        "firstname": 121,
+        "lastname": "2023-01-01",
+        "totalprice": -1,
+        "depositpaid": true,
+        "bookingdates": {
+            "checkin": "2023-01-01",
+            "checkout": "2024-01-01"
+        },
+        "aaaaaaaaa":"aaaaaaaaaa"
+    },
+    {
+        "totalprice": 2121,
+        "depositpaid": true,
+        "bookingdates": {
+            "checkin": "2023-01-01",
+            "checkout": "2024-01-01"
+        },
+        "additionalneeds": "super bowls"
+    },
+    {
+        "firstname": "Artyom",
+        "lastname": "Ovsyannikov",
+        "depositpaid": true,
+        "bookingdates": {
+            "checkin": "2023-01-01",
+            "checkout": "2024-01-01"
+        },
+        "additionalneeds": "super bowls"
+    }
+]
